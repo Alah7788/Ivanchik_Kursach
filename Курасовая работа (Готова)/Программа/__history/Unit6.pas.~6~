@@ -1,0 +1,138 @@
+unit Unit6;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.Menus;
+
+type
+  TForm6 = class(TForm)
+    StringGrid1: TStringGrid;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    procedure N4Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure StringGrid1SetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: string);
+    procedure N3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form6: TForm6;
+  map,map2:array[0..11,0..11] of integer;
+  i,j,n,m,k:integer;
+  sov:boolean;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm6.N2Click(Sender: TObject);
+var z:integer;
+begin
+ randomize;
+
+ for i := 0 to 11 do
+ for j := 0 to 11 do
+ begin
+
+ map[i,j]:=0;
+ map2[i,j]:=0;
+ StringGrid1.Cells[i,j]:='';
+
+ end;
+
+
+ i:=0;
+ while i<=11 do
+  begin
+  j:=Random(12);
+  if map2[0,j]=0 then
+    begin
+      inc(i);
+      n:=1;
+        for m := 0 to 11 do
+        begin
+          map2[m,j]:=n;
+          inc(n);
+          if n>11 then n:=1;
+        end;
+    end;
+
+  end;
+
+
+  for n := 1 to 12 do
+    begin
+
+    i:=Random(12);
+    j:=Random(12);
+    for m := 0 to 11 do
+      begin
+        k:=map2[i,m];
+        map2[i,m]:=map2[j,m];
+        map2[j,m]:=k;
+      end;
+    end;
+
+
+
+    for n := 1 to 24 do
+      begin
+
+      i:=Random(12);
+      j:=Random(12);
+      map[i,j]:=map2[i,j];
+
+      end;
+
+      for i := 0 to 11 do
+      for j := 0 to 11 do
+      if map[i,j]>0 then
+      StringGrid1.Cells[i,j]:=IntToStr(map[i,j]);
+
+    end;
+
+procedure TForm6.N3Click(Sender: TObject);
+begin
+
+for i := 0 to 11 do
+for j := 0 to 11 do
+  begin
+  map[i,j]:=map2[i,j];
+  StringGrid1.Cells[i,j]:=IntToStr(map2[i,j]);
+  end;
+
+  ShowMessage('Ты победил!');
+
+end;
+
+procedure TForm6.N4Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TForm6.StringGrid1SetEditText(Sender: TObject; ACol, ARow: Integer;
+  const Value: string);
+begin
+
+map[Acol,Arow]:=StrToInt(Value);
+
+sov:=true;
+for i := 0 to 11 do
+for j := 0 to 11 do
+if map[i,j]<>map2[i,j] then sov:=False;
+if sov=True then ShowMessage('Ты победил!');
+sov:=False;
+
+end;
+
+end.

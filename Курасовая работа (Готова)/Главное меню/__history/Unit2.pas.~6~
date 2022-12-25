@@ -1,0 +1,112 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls;
+
+type
+  TForm2 = class(TForm)
+    Timer1: TTimer;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    procedure Timer1Timer(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TForm2.Timer1Timer(Sender: TObject);
+
+unit Unit2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, jpeg, ExtCtrls, Menus;
+
+type
+  TForm1 = class(TForm)
+    Timer1: TTimer;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
+    procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Timer1Timer(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  // объявление нового типа col_row
+  col_row = record
+    col: integer;
+    row: integer;
+  end;
+
+const
+
+
+  MAX_SIZE = 32; // максимальное кол-во парных картинок
+  MAX_H = 8;     // максимальный размер поля - 8х8
+  MAX_W = 8;
+
+var
+  Form1: TForm1;
+
+  Pole: array [1..MAX_H,1..MAX_W] of integer;
+  { Pole[i,j] < 100 - код картинки, клетка закрыта;
+    Pole[i,j] > 100 и < 200 - клетка открыта, т.е. игрок видит картинку;
+    Pole[i,j] > 200 - игрок нашел пару для этой картинки }
+
+  Pictures: TBitmap;    // картинки, загруженные из файла
+
+  n : integer;     // колво открытых пар картинок
+  count: integer;  // количества открытых в данный момент клеток
+  open1: col_row;  // координаты 1-й открытой клетки
+  open2: col_row;  // координаты 2-й открытой клетки
+
+  W: integer;    // кол-во клеток по горизонтали
+  H: integer;    // кол-во клеток по вертикали
+            // произведение W и H должно быть кратно 2-м
+  WK: integer;  // ширина клетки
+  HK: integer;  // высота клетки
+
+
+implementation
+
+{$R *.dfm}
+
+// рисует клетку поля
+procedure Kletka(col,row: integer);
+var
+  x,y: integer;     // левый верхний угол клетки (координаты)
+  src, dst : Trect; // источник и получатель битового образа
+
+begin
+
+end;
+
+end.

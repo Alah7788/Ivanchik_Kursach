@@ -1,0 +1,34 @@
+unit Unit6;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.Menus;
+
+type
+  TForm6 = class(TForm)
+    StringGrid1: TStringGrid;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form6: TForm6;
+  map,map2:array[0..11,0..11] of integer;
+  i,j,n,m,k:integer;
+  sov:boolean;
+
+implementation
+
+{$R *.dfm}
+
+
+end.
